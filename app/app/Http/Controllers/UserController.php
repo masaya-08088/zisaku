@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Models\Image;
 
 class UserController extends Controller
 {
@@ -61,7 +62,7 @@ class UserController extends Controller
         $users = new User;
 
         $result = $users->find($id);
-        
+        // dd($result);
         return view('user_edit',[
             'id' => $id,
             'result'=>$result,
@@ -78,8 +79,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return redirect()->route('user.show',['user'=>Auth::id()]);
-        return view('mypage');
+        $instance =new User;
+        $record =  $instance->find($id);
+        
+        $file_name = $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('public/images' , $file_name);        
+        $record->image = $file_name;
+
+        $record->name =$request->name;
+        $record->email =$request->email;
+
+        $record->save();
+        return redirect()->route('user.show',['user'=>Auth::id()]);
 
     }
 
@@ -89,9 +100,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $users  ,Request $request)
     {
-        return view('mypage');
-        // return view('user_delete_conf');
+        $instance = new User;
+
+        $record = $instance->find($instance->id);
+        $record->del_flg=1;
+        Auth::user()->users()->save($record);
+        return redirect()->route('user.destroy',['user'=>Auth::id()]);
+       
     }
 }

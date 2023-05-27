@@ -13,7 +13,8 @@
                     </ul>
                   </div>
             @endif
-          <form action="" method="post">
+          <form action="{{route('user.update',['user'=>Auth::id()])}}" method="post"　enctype="multipart/form-data">
+          @method('PATCH')
               @csrf
                 <div class='edit-blade-1'>
                     <label for="name" class="col-md-1">ユーザー名：</label>
@@ -31,7 +32,7 @@
                 <div class="edit-blade-1">
                     <ladel for="mail" class="col-md-1">メールアドレス　: </ladel>
                     <div class='col-md-1'>
-                    <input id="mail" type="email"  name="mail"  value="{{ $result['email'] }}" required autocomplete="email" autofocus>
+                    <input id="mail" type="email"  name="email"  value="{{ $result['email'] }}" required autocomplete="email" autofocus>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -42,24 +43,20 @@
 
                 <div classs='edit-blade-1'>
                     <label for="avatar">アカウント画像：</label>
-                    <input type="file"id="avatar" name="avatar"accept="image/png, image/jpeg">
+                    
+                    <input type="file" id="avatar" name="image" >
                 </div>
-                <div class='edit-blade-1'>
-                <label for="text">プロフィール：</label>
-                <input type="text"id="episode-confirm" name="episode" required autocomplete="episode">
-                </div>
-
                     <div class='btn-user_edit'>
-                    <a href="{{ route('user.update',['user'=>Auth::id()])}}">
-                            <button type='button' class='btn-user_edit-1'>完了</button>
-                        </a>
+                      <button type='submit' class='btn-user_edit-1'>完了</button>
                     </div>
             </form>
-            <div class="btn-user_edit-1">
-                <a href="{{ route('user.destroy',['user'=>Auth::id()])}}">
-                    <button type='button' class='btn-user_edit-2'>アカウントを削除する</button>
-                </a>
-            </div>
+            <form action="{{route('user.destroy',['user'=>Auth::id()])}}" method="post" >
+                @method('PUT')
+                @csrt
+                <div class="btn-user_edit-1">
+                    <button type='submit' class='btn-user_edit-2' value="PUT">アカウントを削除する</button>
+                </div>
+            </form>
         </div>
     </div>
     @endsection
