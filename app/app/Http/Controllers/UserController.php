@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // $editing = new editing;
     }
 
     /**
@@ -55,9 +56,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        return view('user_edit');
+        $users = new User;
+
+        $result = $users->find($id);
+        
+        return view('user_edit',[
+            'id' => $id,
+            'result'=>$result,
+        ]);
 
     }
 

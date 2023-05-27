@@ -1,5 +1,9 @@
 <?php
 
+
+use Illuminate\Support\Facades\Route;
+
+use App\Http\controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +22,5 @@ Route::get('/', function () {
 });
 Route::resource('user','UserController');
 
-
 Route::get('/home', 'HomeController@index')->name('home');
-});
+});  
