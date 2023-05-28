@@ -43,19 +43,21 @@
 
                 <div classs='edit-blade-1'>
                     <label for="avatar">アカウント画像：</label>
-                    
                     <input type="file" id="avatar" name="image" >
+                     @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                 </div>
                     <div class='btn-user_edit'>
                       <button type='submit' class='btn-user_edit-1'>完了</button>
                     </div>
             </form>
-            <form action="{{route('user.destroy',['user'=>Auth::id()])}}" method="post" >
-                @method('PUT')
-                @csrt
-                <div class="btn-user_edit-1">
-                    <button type='submit' class='btn-user_edit-2' value="PUT">アカウントを削除する</button>
-                </div>
+            <form action="{{route('user.destroy',['user'=>Auth::id()])}}" method="post" class="float-right">
+                 @csrf
+                 @method('delete')
+                <input type="submit" value="削除" class="btn btn-danger"/>
             </form>
         </div>
     </div>

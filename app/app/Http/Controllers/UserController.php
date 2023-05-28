@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-use App\Models\Image;
-
+use App\usering;
 class UserController extends Controller
 {
     /**
@@ -100,14 +99,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $users  ,Request $request)
+    public function destroy( $id)
     {
-        $instance = new User;
+        $users = new User;
 
-        $record = $instance->find($instance->id);
-        $record->del_flg=1;
-        Auth::user()->users()->save($record);
-        return redirect()->route('user.destroy',['user'=>Auth::id()]);
+        $result = $users->find($id);
+        return view('user_delete_conf',[
+            'id' => $id,
+            'result'=>$result,
+        ]);
        
     }
 }

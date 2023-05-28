@@ -2,55 +2,22 @@
 
 @section('content')
     <div class='user_delete_conf'>
+     <div class="card-header">アカウント削除ページ</div>
         <div class='btn-user_delete_conf'>
-            <a href="{{ route('user.delete_conf',['user'=>Auth::id()])}}">
-                <button type='button' class='btn btn-user_delete_conf-1'>削除する</button>
-            </a>
+        　　　<p>アカウントを削除してもよろしいでしょうか？</p>
             <a href="{{ route('user.edit',['user'=>Auth::id()])}}">
-                <button type='button' class='btn btn-user_delete_conf-2'>編集画面に戻る</button>
+                <input type='submit' value="編集画面に戻る" class='btn-user_edit-1'>
             </a>
+            <form action="" method="post">
+                @csrf
+                @method('delete')
+                <input type='submit' value="削除" class='btn-user_edit-1' onclick='return confirm("削除しますか？")';>
+                 <label for="name" class="col-md-1">ユーザー名</label>
+                <input  value="{{ old('name',isset($result['name']) ? $result['name'] :'')}}" type=text  calass='form-contorl' name='name'/>
+                 <ladel for="mail" class="col-md-1">メールアドレス</ladel>
+                <input  value="{{ old('email',isset($result['email']) ? $result['email'] :'')}}" type="email"  calass='form-contorl'  name="email" id='email'/>
+           </form>
         </div>
-
-        <div class='user_edit.blade'>
-            
-            <div class='edit-blade-1'>
-                <label for="name" class="col-md-1">ユーザー名：</label>
-
-                <div class='col-md-1'>
-                 <input id="name" type="text"  name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                </div>
-            </div>
-
-            <div class="edit-blade-1">
-                  <ladel for="mail" class="col-md-1">メールアドレス　: </ladel>
-                <div class='col-md-1'>
-                  <input id="mail" type="email"  name="mail"  value="{{ old('email') }}" required autocomplete="email" autofocus>
-                </div>
-            </div>
-
-            <div class="edit-blade-1">
-                <label for="password" class="col-md-1">パスワード：</label>
-
-                <div class="col-md-1">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                </div>
-            </div>
-
-            <div class="edit-blade-1">
-                <label for="password-confirm" class="col-md-1">パスワード確認：</label>
-                <div class="col-md-1">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                </div>
-            </div>
-
-            <div classs='edit-blade-1'>
-                <!-- 画面表示 -->
-                <label for="avatar">アカウント画像：</label>
-                <input type="file"id="avatar" name="avatar"accept="image/png, image/jpeg">
-            </div>
-            <div class='edit-blade-1'>
-            <label for="text">プロフィール：</label>
-            <input type="text"id="episode-confirm" name="episode" name="email" required autocomplete="episode">
-            </div>
+        
     </div>
 @endsection
