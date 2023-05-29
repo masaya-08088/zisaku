@@ -8,7 +8,7 @@
             <a href="{{ route('user.edit',['user'=>Auth::id()])}}">
                 <input type='submit' value="編集画面に戻る" class='btn-user_edit-1'>
             </a>
-            <form action="" method="post">
+            <form action="{{route('user.destroy',['user'=>Auth::id()])}}" method="post">
                 @csrf
                 @method('delete')
                 <input type='submit' value="削除" class='btn-user_edit-1' onclick='return confirm("削除しますか？")';>

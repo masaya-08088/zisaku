@@ -99,7 +99,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy(User $user)
+    {
+        $user->del_flg=1;
+        $user->save();
+        Auth::logout();
+        return redirect(route('home'));
+    }
+    public function delete($id)
     {
         $users = new User;
 

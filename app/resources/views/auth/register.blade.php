@@ -73,5 +73,5 @@
             </div>
         </div>
     </div>
-</div>"20230523-編集情報実装"
+</div>
 @endsection

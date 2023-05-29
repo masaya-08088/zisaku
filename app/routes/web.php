@@ -22,5 +22,7 @@ Route::get('/', function () {
 });
 Route::resource('user','UserController');
 
+Route::get('/delte/{user}','UserController@delete')->name('delete');
+
 Route::get('/home', 'HomeController@index')->name('home');
 });  

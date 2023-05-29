@@ -54,11 +54,7 @@
                       <button type='submit' class='btn-user_edit-1'>完了</button>
                     </div>
             </form>
-            <form action="{{route('user.destroy',['user'=>Auth::id()])}}" method="post" class="float-right">
-                 @csrf
-                 @method('delete')
-                <input type="submit" value="削除" class="btn btn-danger"/>
-            </form>
+                <a href="{{route('delete',['user'=>Auth::id()])}}" value="削除" class="btn btn-danger float-right">削除</a>
         </div>
     </div>
     @endsection
