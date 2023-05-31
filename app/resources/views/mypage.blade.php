@@ -3,7 +3,7 @@
 @section('content')
     <div class='mypage.blade'>
             <div class='mypage-1'>
-                <a href="{{ route('user.create')}}">
+                <a href="{{ route('reviews.create')}}">
                     <button type='button' class='btn btn-mypage.blade'>新規投稿</button>
                 </a>
                 <a href="{{ route('user.edit',['user'=>Auth::id()])}}">

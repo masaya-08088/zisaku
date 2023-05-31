@@ -13,9 +13,7 @@
         </div>
         <div class='btn-store-registration'>
             <div class='btn-store-registration'>
-                <a href="store_registration.blade.php">
-                    <button type='button' class='btn btn-store-registration'>店舗情報の登録</button>
-                </a>
+                <a href="{{ route('user.create',['user'=>Auth::id()])}}" class='btn btn-store-registration'>店舗情報の登録</a>
             </div>
         </div>
     </div>

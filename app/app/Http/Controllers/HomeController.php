@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users=Auth::user()->toArray();
+        if($users['role']==0){
+            return view('ownerpage');
+        }
+        elseif($users['role']==1){
+            return view('main');
+        }
+        elseif($users['role']==2){
+            return view('shop_manager');
+        }
+        // return view('home');
     }
 }

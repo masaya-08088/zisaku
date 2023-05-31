@@ -17,12 +17,15 @@ use App\Http\controllers\UserController;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'],function(){
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::resource('user','UserController');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('user','UserController');
 Route::get('/delte/{user}','UserController@delete')->name('delete');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('reviews','ReviewsController');
+
+
 });  
