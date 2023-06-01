@@ -13,7 +13,7 @@
         </div>
         <div class='btn-store-registration'>
             <div class='btn-store-registration'>
-                <a href="{{ route('user.create',['user'=>Auth::id()])}}" class='btn btn-store-registration'>店舗情報の登録</a>
+                <a href="{{ route('shops.create',['user'=>Auth::id()])}}" class='btn btn-store-registration'>店舗情報の登録</a>
             </div>
         </div>
     </div>

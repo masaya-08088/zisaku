@@ -15,7 +15,7 @@ class ShopsController extends Controller
     {
         //
     }
-
+      
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +23,13 @@ class ShopsController extends Controller
      */
     public function create()
     {
-        //
+         // $review = new Review;
+
+        // $result = $review->find($id);
+        return view('store_registration'
+            // 'id' => $id,
+            // 'result'=>$result,
+        );
     }
 
     /**
@@ -34,7 +40,8 @@ class ShopsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+
     }
 
     /**

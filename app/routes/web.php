@@ -27,5 +27,6 @@ Route::get('/delte/{user}','UserController@delete')->name('delete');
 
 Route::resource('reviews','ReviewsController');
 
+Route::resource('shops','ShopsController');
 
 });  
