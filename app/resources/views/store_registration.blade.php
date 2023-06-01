@@ -7,8 +7,12 @@
             <div id="map" style="height:500px"></div>
         </div>
             
-        <form >
-        
-        　　　<button>登録</button>
+        <form action="" method="post">
+            <label for="name" class="mt-2">名称　:</label>
+            　<input type="text" class="form-control" name="name"/>
+            <label for="address" class="mt-2">所在地　:</label>
+            　<input type="text" class="form-control" name="address"/>
+        　　　<button type="submit" class="btn btn-primary w-25 mt-3">登録</button>
+        </form>
     </div>
 @endsection
