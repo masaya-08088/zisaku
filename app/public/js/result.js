@@ -11,4 +11,18 @@ function initMap() {
     };
     // 地図のインスタンスを作成します。第一引数にはマップを描画する領域、第二引数にはオプションを指定
     mapObj = new google.maps.Map(map, opt);
+
+map.addListener('click',function(e){
+    getClickLatLng(e.latLng,map);
+});
+}
+function getClickLatLng(lat_lng,map){
+    document.getElementById('lat').textContent = lat_lng.lat();
+    document.getElementById('lng').textContent = lat_lng.lng();
+
+    var marker = new google.maps.Marker({
+        position: lat_lng,
+        map:map
+    });
+    map.panTo(lat_lng);
 }

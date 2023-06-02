@@ -4,7 +4,11 @@
     <div class='store-regisration'>
         <div class='store-regisration1'>
             <h3>店舗情報の登録</h3>
-            <div id="map" style="height:500px"></div>
+            <div id="map" style="height:400px"></div>
+            <ul>
+                <li>lat: <span id="lat"></span></li>
+                <li>lng: <span id="lng"></span></li>
+            </ul>
         </div>
             
         <form action="" method="post">
