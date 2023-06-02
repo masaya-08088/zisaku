@@ -23,13 +23,7 @@ class ShopsController extends Controller
      */
     public function create()
     {
-         // $review = new Review;
-
-        // $result = $review->find($id);
-        return view('store_registration'
-            // 'id' => $id,
-            // 'result'=>$result,
-        );
+        return view('store_registration');
     }
 
     /**
