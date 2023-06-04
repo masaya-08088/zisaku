@@ -29,4 +29,6 @@ Route::resource('reviews','ReviewsController');
 
 Route::resource('shops','ShopsController');
 
+Route::resource('violation','ViolationController');
+
 });  

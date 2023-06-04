@@ -27,16 +27,7 @@ class ReviewsController extends Controller
      */
     public function create()
     {
-
-        // $review = new Review;
-
-        // $result = $review->find($id);
-        return view('post_spot'
-            // 'id' => $id,
-            // 'result'=>$result,
-        );
-
-        
+        return view('post_episode');
     }
 
     /**
@@ -48,13 +39,16 @@ class ReviewsController extends Controller
     public function store(Request $request)
     {
         $review = new Review;
-
+      
         $review->title = $request->title;
         $review->image = $request->image;
         $review->points = $request->points;
         $review->episode = $request->episode;
+        
 
         $review->save();
+        dd($review);
+        
          return redirect()->route('reviews.create',['user'=>Auth::id()]);
     }
 
@@ -66,7 +60,7 @@ class ReviewsController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

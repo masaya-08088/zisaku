@@ -8,10 +8,23 @@
         <h5>店舗一覧</h5>
     </div>
     <div class="new-spot-3">
-        <p>・店舗名⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎</p>
-        <p>⭐️⭐️⭐️⭐️⭐️</p>
-        <p>・住所⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎⚪︎</p>
-        <a href="{{ route('user.create',['user'=>Auth::id()])}}">選択</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope='col'>店舗名</th>
+                    <th scope='col'>レビュー</th>
+                    <th scope='col'>住所</th>
+                </tr>
+            </thead>
+            <tr>
+                <th scope='col'>
+                    <!-- 画像追加 -->
+                 <a href="{{ route('reviews.create')}}">選択</a>
+                </th>
+                <th scope='col'></th>
+                <th scope='col'></th>
+                <th scope='col'></th>
+            </tr>
     </div>
 
 @endsection

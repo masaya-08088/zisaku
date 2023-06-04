@@ -30,7 +30,7 @@ class HomeController extends Controller
             return view('ownerpage');
         }
         elseif($users['role']==1){
-            return view('main');
+            return view('mypage');
         }
         elseif($users['role']==2){
             return view('shop_manager');

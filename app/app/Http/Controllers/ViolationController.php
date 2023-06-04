@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
-use App\Shop;
 
-class ShopsController extends Controller
+use App\Violations;
+
+class ViolationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class ShopsController extends Controller
     {
         //
     }
-      
+
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +26,7 @@ class ShopsController extends Controller
      */
     public function create()
     {
-        return view('store_registration');
+        return view('violation_comp');
     }
 
     /**
@@ -35,22 +37,16 @@ class ShopsController extends Controller
      */
     public function store(Request $request)
     {
-        $shop = new Shop;
-
-        $shop->name = $request->name;
-        $shop->address = $request->address;
-        $shop->comment = $request->comment;
-        $shop->longitude = $request->longitude;
-        $shop->atitude = $request->atitude;
-        $shop->image = $request->image;
+        $violation = new Violations;
+      
+        $violation->title = $request->title;
+        $violation->episode = $request->episode;
         
 
-        $file_name = $request->file('image')->getClientOriginalName();
-        $request->file('image')->storeAs('public/images' , $file_name);        
-        $shop->image = $file_name;
-
-        $review->save();
-         return redirect()->route('reviews.create',['user'=>Auth::id()]);
+        $violation->save();
+        dd($violation);
+        
+         return redirect();
     }
 
     /**
@@ -61,7 +57,7 @@ class ShopsController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
