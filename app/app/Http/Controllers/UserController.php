@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-use App\usering;
+use App\Shop;
 class UserController extends Controller
 {
     /**
@@ -25,7 +25,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('post_spot');
+        $shops = new Shop;
+        $shops = $shops->all();
+        return view('post_spot',[
+            'shops' => $shops
+        ]);
     }
 
     /**

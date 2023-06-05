@@ -2,14 +2,15 @@
 
 @section('content')
     <div class='post_episode.blade'>
-        <form action="{{ route('reviews.store',['user'=>Auth::id()])}}" method="post">
+        <form action="{{ route('reviews.store',['user'=>Auth::id()])}}" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" value="{{$id}}" name='shop_id'>
             <div class='post_episode'>
             <h4>・スポット情報</h4>
                <label for="name">店舗名 </label>
-                 <input type="text" class='form-control' name='name' value="{{ old('name')}}">
+                 <input type="text" class='form-control' name='name' value="{{ old('name',$result['name'])}}">
                 <label for="address">所在地 </label>
-                 <input type="text" class='form-control' name='address' value="{{ old('address')}}">
+                 <input type="text" class='form-control' name='address' value="{{ old('address',$result['address'])}}">
             </div>
             <div class="new-title">
                 <h5>・エピソード登録</h5>
@@ -21,12 +22,12 @@
                     <label for="episode" class="mt--2">コメント内容 </label>
                     <textarea class="form-control" name="episode"></textarea>
                 </div>
-                <select name='review'>
-                    <option value='one'>⭐️</option>
-                    <option value='to'>⭐️⭐️</option>
-                    <option value='san'>⭐️⭐️⭐️</option>
-                    <option value='four'>⭐️⭐️⭐️⭐️</option>
-                    <option value='five'>⭐️⭐️⭐️⭐️⭐️</option>
+                <select name='points'>
+                    <option value='1'>⭐️</option>
+                    <option value='2'>⭐️⭐️</option>
+                    <option value='3'>⭐️⭐️⭐️</option>
+                    <option value='4'>⭐️⭐️⭐️⭐️</option>
+                    <option value='5'>⭐️⭐️⭐️⭐️⭐️</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary w-25 mt-3">投稿内容確認</button>

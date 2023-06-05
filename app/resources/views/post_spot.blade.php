@@ -11,20 +11,29 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope='col'></th>
                     <th scope='col'>店舗名</th>
                     <th scope='col'>レビュー</th>
                     <th scope='col'>住所</th>
                 </tr>
             </thead>
+            <tbody>
+            @foreach($shops as $shop)
             <tr>
                 <th scope='col'>
                     <!-- 画像追加 -->
-                 <a href="{{ route('reviews.create')}}">選択</a>
+
+                @if(isset($shop))
+                 <a href="{{ route('shopdetale',['id'=>$shop['id']])}}">選択</a>
+                @endif
                 </th>
+                <th scope='col'> {{ $shop['name']}} </th>
                 <th scope='col'></th>
-                <th scope='col'></th>
-                <th scope='col'></th>
+                <th scope='col'> {{ $shop['address']}} </th>
             </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 
 @endsection

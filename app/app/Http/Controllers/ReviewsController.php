@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 
+use App\Shop;
 use App\Review;
 
 class ReviewsController extends Controller
@@ -27,7 +28,7 @@ class ReviewsController extends Controller
      */
     public function create()
     {
-        return view('post_episode');
+
     }
 
     /**
@@ -39,17 +40,22 @@ class ReviewsController extends Controller
     public function store(Request $request)
     {
         $review = new Review;
-      
+        
+        $review->user_id = Auth::id();
+        $review->shop_id = $request->shop_id;
         $review->title = $request->title;
-        $review->image = $request->image;
         $review->points = $request->points;
         $review->episode = $request->episode;
+
+        $file_name = $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('public/images' , $file_name);        
+        $review->image = $file_name;
         
 
         $review->save();
-        dd($review);
         
-         return redirect()->route('reviews.create',['user'=>Auth::id()]);
+        
+         return view('home');
     }
 
     /**
@@ -95,5 +101,17 @@ class ReviewsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function Shopdetale($id)
+    {
+    
+        $shops = new Shop;
+
+        $result = $shops->find($id);
+        return view('post_episode',[
+            'id' => $id,
+            'result' => $result,
+        ]);
+
     }
 }
