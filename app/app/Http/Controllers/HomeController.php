@@ -25,13 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // 管理者
         $users=Auth::user()->toArray();
         if($users['role']==0){
             return view('ownerpage');
         }
+        // 一般ユーザー
         elseif($users['role']==1){
             return view('mypage');
         }
+        // 店舗管理者
         elseif($users['role']==2){
             return view('shop_manager');
         }

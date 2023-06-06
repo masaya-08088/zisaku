@@ -28,7 +28,12 @@ class ReviewsController extends Controller
      */
     public function create()
     {
+        $displays = new Review;
+        $displays = $reviews->all();
+        return view('main',[
+            'displays' => $displays,
 
+        ]);
     }
 
     /**
@@ -114,4 +119,5 @@ class ReviewsController extends Controller
         ]);
 
     }
+
 }
