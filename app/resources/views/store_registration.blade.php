@@ -12,15 +12,18 @@
             @csrf
                 
                     <input type="text" id="lat" name="longitude">   
-                    <input type="text" id="lng" name="atitude">  
-                
-               
+                    <input type="text" id="lng" name="atitude"> 
+
+                <div class="review-1">
+                <label for="name" class="mt-2">店舗名　:</label>
+                　<input type="text" class="form-control" name="name"/>
                 <label for="address" class="mt-2">所在地　:</label>
                 　<input type="text" class="form-control" name="address"/>
                 <label for="comment" class="mt--2">コメント内容 :</label>
                 <textarea class="form-control" name="comment"></textarea>
                 <label for="image">お店画像：</label>
                 <input type="file" id="image" name="image" >
+                </div>
             　　　<button type="submit" class="btn btn-primary w-25 mt-3">登録</button>
             </form>
     </div>

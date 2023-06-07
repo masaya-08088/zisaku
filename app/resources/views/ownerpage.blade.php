@@ -7,12 +7,13 @@
         </div>
         <div class='ownerpage-3'>
             <a href="user_list.blade.php">
-                <button type='button' class='btn btn-ownerpage'>違反報告</button>
+                <button type="submit" class="btn btn-primary w-25 mt-3">違反報告</button>
             </a>
         </div>
         <div class='ownerpage-4'>
-            <a href="post_list.blade.php"></a>
-            <button type='button' class='btn btn-ownerpage-1'></button>
+            <a href="post_list.blade.php">
+            <button type="submit" class="btn btn-primary w-25 mt-3">ステータス確認</button>
+            </a>
         </div>
     </div>
 @endsection

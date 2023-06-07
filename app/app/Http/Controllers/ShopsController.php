@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Shop;
 
@@ -48,7 +48,7 @@ class ShopsController extends Controller
         $request->file('image')->storeAs('public/images' , $file_name);        
         $shop->image = $file_name;
 
-        $review->save();
+        $shop->save();
          return redirect()->route('reviews.create',['user'=>Auth::id()]);
     }
 

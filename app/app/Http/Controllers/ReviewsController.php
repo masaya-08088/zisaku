@@ -18,7 +18,12 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        //
+        $displays = new Review;
+        $displays = $reviews->all();
+        return view('main',[
+            'displays' => $displays,
+
+        ]);
     }
 
     /**
@@ -28,12 +33,7 @@ class ReviewsController extends Controller
      */
     public function create()
     {
-        $displays = new Review;
-        $displays = $reviews->all();
-        return view('main',[
-            'displays' => $displays,
-
-        ]);
+        return view('shop_manager');
     }
 
     /**
@@ -119,5 +119,6 @@ class ReviewsController extends Controller
         ]);
 
     }
+    
 
 }
