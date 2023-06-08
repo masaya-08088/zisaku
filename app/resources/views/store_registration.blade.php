@@ -18,7 +18,7 @@
                 <label for="name" class="mt-2">店舗名　:</label>
                 　<input type="text" class="form-control" name="name"/>
                 <label for="address" class="mt-2">所在地　:</label>
-                　<input type="text" class="form-control" name="address"/>
+                　<input id="address" type="text" class="form-control" name="address"/>
                 <label for="comment" class="mt--2">コメント内容 :</label>
                 <textarea class="form-control" name="comment"></textarea>
                 <label for="image">お店画像：</label>

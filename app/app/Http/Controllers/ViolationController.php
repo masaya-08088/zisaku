@@ -16,7 +16,7 @@ class ViolationController extends Controller
      */
     public function index()
     {
-        //
+         
     }
 
     /**
@@ -26,7 +26,7 @@ class ViolationController extends Controller
      */
     public function create()
     {
-        return view('violation_comp');
+         return view('user_list');
     }
 
     /**
@@ -57,7 +57,7 @@ class ViolationController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('user_list');
     }
 
     /**

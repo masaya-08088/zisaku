@@ -14,18 +14,28 @@ use App\Http\controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'MainController@main')->name('main');
+
+
 Auth::routes();
+
 
 Route::group(['middleware' => 'auth'],function(){
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user','UserController');
 Route::get('/delte/{user}','UserController@delete')->name('delete');
 
 Route::get('/shopdetale/{id}','ReviewsController@Shopdetale')->name('shopdetale');
+
+// post_list用
+Route::get('/status/{id}','ReviewsController@Status')->name('status');
+
 
 
 Route::resource('reviews','ReviewsController');

@@ -51,7 +51,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('mypage');
+        $user = new User;
+        $user = $user->all();
+        return view('mypage',[
+            'users' => $user
+        ]);
     }
 
     /**

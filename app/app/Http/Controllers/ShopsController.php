@@ -96,4 +96,5 @@ class ShopsController extends Controller
     {
         //
     }
+
 }

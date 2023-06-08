@@ -18,12 +18,8 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        $displays = new Review;
-        $displays = $reviews->all();
-        return view('main',[
-            'displays' => $displays,
-
-        ]);
+        
+        return view('main');
     }
 
     /**
@@ -59,7 +55,6 @@ class ReviewsController extends Controller
 
         $review->save();
         
-        
          return view('home');
     }
 
@@ -82,7 +77,14 @@ class ReviewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $review = new Review;
+        $result = $review->find($id);
+        // dd($result);
+        return view('post_edit',[
+            'id' => $id,
+            'result'=>$result,
+        ]);
+
     }
 
     /**
@@ -94,7 +96,20 @@ class ReviewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reviews = new Review;
+        
+        $reviews->user_id = Auth::id();
+        $reviews->shop_id = $request->shop_id;
+        $reviews->title = $request->title;
+        $reviews->points = $request->points;
+        $reviews->episode = $request->episode;
+
+        $file_name = $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('public/images' , $file_name);        
+        $reviews->image = $file_name;
+        
+        $reviews->save();
+        return redirect()->route('user.show',['user'=>Auth::id()]);
     }
 
     /**
@@ -119,6 +134,5 @@ class ReviewsController extends Controller
         ]);
 
     }
-    
 
 }

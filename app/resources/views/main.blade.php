@@ -5,7 +5,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope='col'></th>
+                    
                     <th scope='col'>タイトル</th>
                     <th scope='col'>ポイント</th>
                     <th scope='col'>エピソード</th>
@@ -16,7 +16,7 @@
             
             <tr>
             <th scope='col'> {{ $display['title']}} </th>
-            <th scope='col'> {{ $display['point']}} </th>
+            <th scope='col'> {{ $display['points']}} </th>
             <th scope='col'> {{ $display['episode']}} </th>
             </tr>
             @endforeach
