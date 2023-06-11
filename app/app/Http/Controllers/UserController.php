@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Shop;
+use App\Review;
+
+
 class UserController extends Controller
 {
     /**
@@ -53,8 +56,16 @@ class UserController extends Controller
     {
         $user = new User;
         $user = $user->all();
+        
+
+        $my = new Review;
+        $mys = $my->where('user_id',$id)->get();
+        
+        
+        
         return view('mypage',[
-            'users' => $user
+            'users' => $user,
+            'mys'=> $mys
         ]);
     }
 
@@ -92,7 +103,6 @@ class UserController extends Controller
         $file_name = $request->file('image')->getClientOriginalName();
         $request->file('image')->storeAs('public/images' , $file_name);        
         $record->image = $file_name;
-
         $record->name =$request->name;
         $record->email =$request->email;
 

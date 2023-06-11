@@ -11,7 +11,6 @@
             </a>
         </div>
         <div class='ownerpage-4'>
-            <a href="{{ route('status',['user'=>Auth::id()])}}">
             <button type="submit" class="btn btn-primary w-25 mt-3">ステータス確認</button>
             </a>
         </div>

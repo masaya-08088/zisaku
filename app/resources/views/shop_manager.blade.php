@@ -7,7 +7,7 @@
             <h1>店舗管理者ページ</h1>
         </div>
         <div class='btn-review'>
-            <a href="shop_review_cjeck.php">
+            <a href="{{ route('manager',['user'=>Auth::id()])}}">
                 <button type='button' class='btn btn-review'>レビュー確認</button>
             </a>
         </div>

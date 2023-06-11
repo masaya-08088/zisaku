@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Violations;
+use App\Review;
+use App\User;
+
 
 class ViolationController extends Controller
 {
@@ -16,7 +19,12 @@ class ViolationController extends Controller
      */
     public function index()
     {
-         
+        $violation = new Review;
+        $violation = $violation->all();
+        
+        return view('post_detail',[
+            'violation' => $violation
+        ]);
     }
 
     /**
@@ -93,4 +101,7 @@ class ViolationController extends Controller
     {
         //
     }
+
+    
+
 }

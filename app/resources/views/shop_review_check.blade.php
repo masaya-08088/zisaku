@@ -14,9 +14,24 @@
         </button>
     </div>
     <div class="review-2">
-        <!-- ユーザー名
-        タイトル
-        エピソード -->
+    <table class="table">
+            <thead>
+                <tr>
+                    <th scope='col'>ユーザー名</th>
+                    <th scope='col'>タイトル</th>
+                    <th scope='col'>エピソード</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($tennpo as $tennpos)
+            <tr>
+            <th scope='col'>{{ $tennpos[name]}}</th>
+            <th scope='col'>{{ $tennpos[title]}}</th>
+            <th scope='col'>{{ $tennpos[episode]}}</th>
+            </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
     </div>
 @endsection

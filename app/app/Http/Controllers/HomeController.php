@@ -32,7 +32,7 @@ class HomeController extends Controller
         }
         // 一般ユーザー
         elseif($users['role']==1){
-            return view('post_edit');
+            return view('home');
         }
         // 店舗管理者
         elseif($users['role']==2){

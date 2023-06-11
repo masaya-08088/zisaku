@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Shop;
+use App\Review;
+
 
 class ShopsController extends Controller
 {
@@ -83,7 +85,24 @@ class ShopsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $review = new Review;
+        $reviews = $review->find($id);
+
+        $file_name = $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('public/images' , $file_name);        
+        $reviews->image = $file_name;
+
+        $reviews->user_id = Auth::id();
+        $reviews->shop_id = $request->shop_id;
+        $reviews->title = $request->title;
+        $reviews->points = $request->points;
+        $reviews->episode = $request->episode;
+        
+        
+        
+        $reviews->save();
+        return redirect()->route('user.show',['user'=>Auth::id()]);
     }
 
     /**
@@ -95,6 +114,17 @@ class ShopsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function manager()
+    {
+        //  $shops = new Shop;
+
+        // $review = $shops
+        // ->join('reviews','shops.id','reviews.shop_id')
+        // ->where('reviews.id',$id)
+        // ->first();
+        return view('shop_review_check');
     }
 
 }

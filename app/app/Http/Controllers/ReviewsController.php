@@ -19,7 +19,7 @@ class ReviewsController extends Controller
     public function index()
     {
         
-        return view('main');
+        
     }
 
     /**
@@ -132,7 +132,6 @@ class ReviewsController extends Controller
             'id' => $id,
             'result' => $result,
         ]);
-
     }
 
 }

@@ -13,7 +13,6 @@
             </thead>
             <tbody>
             @foreach($displays as $display)
-            
             <tr>
             <th scope='col'> {{ $display['title']}} </th>
             <th scope='col'> {{ $display['points']}} </th>
