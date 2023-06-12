@@ -13,10 +13,10 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($violation as $violations)
+            @foreach($vio as $violations)
             <tr>
             <th>　
-            <a href="{{ route('viol',['id'=>$violations['id']]}}">違反報告</a>                
+            <a href="{{ route('viol',['id'=>$violations['id']])}}">違反報告</a>                
 　          </th>
             <th scope='col'> {{ $violations['title']}} </th>
             <th scope='col'> {{ $violations['points']}} </th>

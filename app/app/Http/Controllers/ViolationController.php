@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
-use App\Violations;
+
 use App\Review;
 use App\User;
+use App\Violation;
 
 
 class ViolationController extends Controller
@@ -19,11 +20,11 @@ class ViolationController extends Controller
      */
     public function index()
     {
-        $violation = new Review;
-        $violation = $violation->all();
+        $vio = new Review;
+        $vio = $vio->all();
         
         return view('post_detail',[
-            'violation' => $violation
+            'vio' => $vio
         ]);
     }
 
@@ -45,14 +46,15 @@ class ViolationController extends Controller
      */
     public function store(Request $request)
     {
-        $violation = new Violations;
-      
-        $violation->title = $request->title;
-        $violation->episode = $request->episode;
+        $violations = new Violation;
+        dd($request);
+        $violations->$user_id = Auth::id();
+        $violations->$review_id = $request->review_id;
+        $violations->$text = $request->text;
         
-
-        $violation->save();
-        dd($violation);
+        
+        $violations->save();
+        
         
          return redirect();
     }

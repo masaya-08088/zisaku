@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Review;
 use App\Shop;
+use App\User;
 
 
 class MainController extends Controller
@@ -38,12 +39,13 @@ class MainController extends Controller
     public function viol($id)
     {
         
-        $review = new Review;
-
+        $review = new User;
+        
         $viol = $review
-        ->join('users','reviews.id','users.reviews_id')
-        ->where('users.id',$id)
+        ->join('reviews','users.id','reviews.user_id')
+        ->where('reviews.id',$id)
         ->first();
+        
         
         return view('violation',[
             'viol' => $viol

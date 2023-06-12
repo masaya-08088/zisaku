@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $editing = new editing;
+        
     }
 
     /**
