@@ -8,7 +8,6 @@
     <div>
         <button type="submit">投稿検索</button>
         <button>
-            <a href="{{}}" class="text-white">
                 クリア
             </a>
         </button>

@@ -6,7 +6,7 @@
 
     <h3>管理ユーザー専用画面</h3>
     </div>
-    <table class="table">
+        <table class="table">
             <thead>
                 <tr>
                     <th scope='col'>投稿ID</th>
@@ -21,11 +21,12 @@
                 </tr>
             </thead>
             <tbody>
-            
+            @foreach($users as $user)
+            @if($user['role']==1)
             <tr>
                 <th scope='col'></th>
-                <th scope='col'></th>
-                <th scope='col'></th>
+                <th scope='col'>{{$user['name']}}</th>
+                <th scope='col'>{{$user['review_id']}}</th>
                 <th scope='col'></th>
                 <th scope='col'></th>
                 <th scope='col'></th>
@@ -33,7 +34,8 @@
                 <th scope='col'></th>
                 <th scope='col'></th>
             </tr>
-            
+            @endif
+            @endforeach
             </tbody>
         </table>
 @endsection

@@ -35,7 +35,7 @@ class ViolationController extends Controller
      */
     public function create()
     {
-         return view('user_list');
+       
     }
 
     /**
@@ -47,16 +47,16 @@ class ViolationController extends Controller
     public function store(Request $request)
     {
         $violations = new Violation;
-        dd($request);
-        $violations->$user_id = Auth::id();
-        $violations->$review_id = $request->review_id;
-        $violations->$text = $request->text;
+       
+        $violations->user_id = Auth::id();
+        $violations->review_id = $request->review_id;
+        $violations->text = $request->text;
         
         
         $violations->save();
         
         
-         return redirect();
+         return redirect()->route('user.show',['user'=>Auth::id()]);
     }
 
     /**
@@ -67,7 +67,12 @@ class ViolationController extends Controller
      */
     public function show($id)
     {
-        return view('user_list');
+        $review = new Review;
+        $review = $review->all();
+       return view('stop_display',[
+        'id'=>$id,
+        'review'=>$review
+       ]);
     }
 
     /**
@@ -78,7 +83,21 @@ class ViolationController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $violation = new Violation;
+        $review = new Review;
+        $user = new User;
+        $users = $user->where('id',$id)->get();
+        $reviews = $review->where('user_id',$id)->get();
+        $viol = $violation->where('user_id',$id)->get();
+        
+        return view('stop_display',[
+            'id'=> $id,
+            'viol' => $viol,
+            'users'=>$users,
+            'reviews'=>$reviews
+           
+        ]);
     }
 
     /**
@@ -99,9 +118,12 @@ class ViolationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        
+        $user->del_flg=1;
+        $user->save();
+        return redirect(route('user_list'));
     }
 
     

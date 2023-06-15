@@ -18,7 +18,15 @@ class UserController extends Controller
      */
     public function index()
     {
+        $user = new User;
         
+        // $users = $user
+        // ->join('reviews','users.id','reviews.user_id')
+        // ->get()->count();
+        $users=User::withCount('review','violation')->having('violation_count','>',0)->get();
+        return view('user_list',[
+            'users' => $users
+        ]);
     }
 
     /**

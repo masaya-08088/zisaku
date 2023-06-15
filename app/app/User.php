@@ -45,4 +45,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Shop');
        }
        
+       public function violation(){
+        return $this->hasMany('App\Violation');
+       }
+       
 }

@@ -6,11 +6,12 @@
             <h1>管理者ページ</h1>
         </div>
         <div class='ownerpage-3'>
-            <a href="{{ route('violation.create',['user'=>Auth::id()])}}">
+            <a href="{{ route('user.index')}}">
                 <button type="submit" class="btn btn-primary w-25 mt-3">違反報告</button>
             </a>
         </div>
         <div class='ownerpage-4'>
+            <a href="{{ route('reviews.index')}}">
             <button type="submit" class="btn btn-primary w-25 mt-3">ステータス確認</button>
             </a>
         </div>

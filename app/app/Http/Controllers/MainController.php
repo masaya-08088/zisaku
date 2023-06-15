@@ -48,7 +48,8 @@ class MainController extends Controller
         
         
         return view('violation',[
-            'viol' => $viol
+            'viol' => $viol,
+            'id' => $id
         ]);
     }
 

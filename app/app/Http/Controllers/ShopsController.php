@@ -62,7 +62,19 @@ class ShopsController extends Controller
      */
     public function show($id)
     {
+        $user = new User;
+        $user = $user->all();
         
+
+        $review = new Review;
+        $reviews = $review->where('user_id',$id)->get();
+        
+        
+        
+        return view('shop_review_check',[
+            'users' => $user,
+            'mys'=> $reviews
+        ]);
     }
 
     /**
@@ -118,13 +130,7 @@ class ShopsController extends Controller
 
     public function manager()
     {
-        //  $shops = new Shop;
-
-        // $review = $shops
-        // ->join('reviews','shops.id','reviews.shop_id')
-        // ->where('reviews.id',$id)
-        // ->first();
-        return view('shop_review_check');
+        return view('post_list');
     }
 
 }

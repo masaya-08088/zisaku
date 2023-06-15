@@ -18,16 +18,21 @@
                 </tr>
             </thead>
             <tbody>
-            
+            @foreach($users as $user)
+            @if($user['role']==1)
             <tr>
+               
                 <th scope='col'></th>
-                <th scope='col'></th>
-                <th scope='col'></th>
-                <th scope='col'></th>
-                <th scope='col'></th>
+                <th scope='col'>{{ $user['name']}}</th>
+                <th scope='col'>{{ $user['review_count']}}</th>
+                <th scope='col'>{{ $user['violation_count']}}</th>
+                <th scope='col'>
+                    <a href="{{route('violation.edit',['violation'=>$user['id']])}}">公開・非公開</a>
+                </th>
                 <th scope='col'></th>
             </tr>
-            
+            @endif
+            @endforeach
             </tbody>
         </table>
 @endsection

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Shop;
 use App\Review;
+use App\User;
 
 class ReviewsController extends Controller
 {
@@ -18,8 +19,17 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        
-        
+        $users = new User;
+        $users = new Review;
+        $users = new Shop;
+
+        $users=User::withCount('review','violation')->having('violation_count','>',0)->get();
+        $review=Review::withCount('user','shop')->get();
+        $shop=Shop::withCount('user','review')->get();
+        dd($users);
+        return view('post_list',[
+            'users' => $users
+        ]);
     }
 
     /**
