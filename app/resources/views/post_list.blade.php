@@ -21,20 +21,27 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($users as $user)
-            @if($user['role']==1)
+                
+            @foreach($reviews as $review)
+           
             <tr>
-                <th scope='col'></th>
-                <th scope='col'>{{$user['name']}}</th>
-                <th scope='col'>{{$user['review_id']}}</th>
-                <th scope='col'></th>
-                <th scope='col'></th>
-                <th scope='col'></th>
-                <th scope='col'></th>
-                <th scope='col'></th>
+                <th scope='col'>{{$review['review']}}</th>
+                <th scope='col'>{{$review['user']}}</th>
+                <th scope='col'>{{$review['title']}}</th>
+                <th scope='col'>{{$review['name']}}</th>
+                <th scope='col'>{{$review['created_at']}}</th>
+                <th scope='col'>{{$review['points']}}</th>
+                <th scope='col'>
+                @if($review['del']==0)
+                    <a href="{{route('hikoukai',['id'=>$review['review']])}}">非公開する</a>
+                  @else
+                    <a href="{{route('koukai',['id'=>$review['review']])}}">公開する</a>
+                @endif
+                </th>
+                <th scope='col'>{{$review['violation_count']}}</th>
                 <th scope='col'></th>
             </tr>
-            @endif
+          
             @endforeach
             </tbody>
         </table>

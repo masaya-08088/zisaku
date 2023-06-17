@@ -4,13 +4,21 @@
 <div class="review-1">
 <h3>当店舗に対してのレビュー</h3>
 
-    <input type="search" placeholder="ユーザー名を入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
-    <div>
-        <button type="submit">投稿検索</button>
-        <button>
-                クリア
-            </a>
-        </button>
+<div　class="review-3">
+          <input type="text" name="keyword" >
+          <input type="submit" value="検索">
+          <div class="form-group row">
+   <label for="sel01" class="col-md-4 col-form-label text-md-right">評価</label>
+   <div class="col-md-6">
+      <select class="form-control" id="sel01" name="sel01">
+         <option value="1">1</option>
+         <option value="2" selected>2</option>
+         <option value="3" selected>3</option>
+         <option value="4" selected>4</option>
+         <option value="5" selected>5</option>
+         <option value="6" selected></option>
+      </select>
+   </div>
     </div>
     <div class="review-2">
     <table class="table">
@@ -22,11 +30,11 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($tennpo as $tennpos)
+            @foreach($reviews as $review)
             <tr>
-            <th scope='col'>{{ $tennpos[name]}}</th>
-            <th scope='col'>{{ $tennpos[title]}}</th>
-            <th scope='col'>{{ $tennpos[episode]}}</th>
+            <th scope='col'>{{ $review[name]}}</th>
+            <th scope='col'>{{ $review[title]}}</th>
+            <th scope='col'>{{ $review[episode]}}</th>
             </tr>
             @endforeach
             </tbody>

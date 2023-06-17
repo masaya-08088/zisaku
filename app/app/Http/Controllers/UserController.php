@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Shop;
 use App\Review;
+use App\Violation;
 
 
 class UserController extends Controller
@@ -16,14 +17,29 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = new User;
-        
-        // $users = $user
-        // ->join('reviews','users.id','reviews.user_id')
-        // ->get()->count();
-        $users=User::withCount('review','violation')->having('violation_count','>',0)->get();
+        // $user = new User;
+        $keyword=$request->input('keyword');
+        $user = Review::query();
+        $space = mb_convert_kana($keyword, 's');
+        $keys = explode(" ",$space);
+        // $users=User::where('role',1)->withCount('review','violation')->having('violation_count','>',0)->get();
+        $user->join('violations',function ($user) use($request){
+            $user->on('reviews.id','=','violations.review_id');
+       })
+       ->join('shops',function ($user) use($request){
+        $user->on('reviews.shop_id','=','shops.id');
+       });
+       if(!empty($keyword)){
+        foreach($keys as $key){
+            $user->orWhere('title', 'LIKE', "%{$key}%")
+            ->orWhere('episode', 'LIKE', "%{$key}%")
+            ->orWhere('address', 'LIKE', "%{$key}%");
+            }
+       }
+       $users=$user->get();
+       
         return view('user_list',[
             'users' => $users
         ]);

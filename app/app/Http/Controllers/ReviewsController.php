@@ -19,17 +19,7 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        $users = new User;
-        $users = new Review;
-        $users = new Shop;
-
-        $users=User::withCount('review','violation')->having('violation_count','>',0)->get();
-        $review=Review::withCount('user','shop')->get();
-        $shop=Shop::withCount('user','review')->get();
-        dd($users);
-        return view('post_list',[
-            'users' => $users
-        ]);
+       
     }
 
     /**
@@ -132,15 +122,33 @@ class ReviewsController extends Controller
     {
         //
     }
+
+
+
     public function Shopdetale($id)
     {
     
         $shops = new Shop;
 
+
         $result = $shops->find($id);
         return view('post_episode',[
             'id' => $id,
             'result' => $result,
+        ]);
+    }
+
+
+
+    public function list()
+    {
+        $review = new Review;
+        $reviews = $review->join('users','reviews.user_id','users.id')->join('shops','reviews.shop_id','shops.id')->select('reviews.*','users.*','shops.*','users.name as user','reviews.id as review','reviews.del_flg as del')
+        ->where('role',1)->withCount('violation')->get();
+        // dd($reviews);
+        
+        return view('post_list',[
+            'reviews' => $reviews,
         ]);
     }
 

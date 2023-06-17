@@ -83,21 +83,13 @@ class ViolationController extends Controller
      */
     public function edit($id)
     {
-        
-        $violation = new Violation;
-        $review = new Review;
-        $user = new User;
-        $users = $user->where('id',$id)->get();
-        $reviews = $review->where('user_id',$id)->get();
-        $viol = $violation->where('user_id',$id)->get();
-        
-        return view('stop_display',[
-            'id'=> $id,
-            'viol' => $viol,
-            'users'=>$users,
-            'reviews'=>$reviews
-           
-        ]);
+        $users = new User;
+        $user = $users->find($id);
+       
+        $user->del_flg=1;
+        $user->save();
+        return redirect('/user');
+
     }
 
     /**
@@ -109,7 +101,7 @@ class ViolationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -121,11 +113,8 @@ class ViolationController extends Controller
     public function destroy(User $user)
     {
         
-        $user->del_flg=1;
-        $user->save();
-        return redirect(route('user_list'));
+       
     }
 
-    
 
 }

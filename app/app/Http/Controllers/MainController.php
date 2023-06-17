@@ -52,6 +52,41 @@ class MainController extends Controller
             'id' => $id
         ]);
     }
+    public function shoplist($id)
+    {
+        $shop = new Shop;
+        
+        $shops = $shop->all();
+       
+        return view('list_stores',[
+            'shops' => $shops
+        ]);
+    }
+
+    // レビューの非公開公開
+    public function hikoukai($id)
+    {
+       
+        $reviews = new Review;
+        $review = $reviews->find($id);
+    //    dd($review);
+        $review->del_flg=1;
+        $review->save();
+        return redirect('/list');
+
+    }
+
+    public function  koukai($id){
+
+        $reviews = new Review;
+        $review = $reviews->find($id);
+       
+        $review->del_flg=0;
+        $review->save();
+       
+        return redirect('/list');
+    }
+    
 
     
 }

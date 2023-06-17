@@ -7,9 +7,9 @@
             <h1>店舗管理者ページ</h1>
         </div>
         <div class='btn-review'>
-            <!-- <a href="{{ route('shops.show',['user'=>Auth::id()])}}">
+            <a href="{{ route('shops.show',['shop'=>Auth::id()])}}">
                 <button type='button' class='btn btn-review'>レビュー確認</button>
-            </a> -->
+            </a>
         </div>
         <div class='btn-store-registration'>
             <div class='btn-store-registration'>

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class='stop-display.blade'>
-    <form action="{{route('violation.destroy',['user'=>Auth::id()])}}" method="post">
+    <form action="{{route('violation.destroy',['violation'=>Auth::id()])}}" method="post">
       @csrf
     @foreach($users as $user)
       <h1>ユーザー名：<?php echo $user['name']; ?></h1>

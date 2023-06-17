@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Shop;
 use App\Review;
+use App\User;
 
 
 class ShopsController extends Controller
@@ -16,7 +17,7 @@ class ShopsController extends Controller
      */
     public function index()
     {
-        //
+       
     }
       
     /**
@@ -68,12 +69,13 @@ class ShopsController extends Controller
 
         $review = new Review;
         $reviews = $review->where('user_id',$id)->get();
-        
+
         
         
         return view('shop_review_check',[
             'users' => $user,
-            'mys'=> $reviews
+            'reviews'=> $reviews,
+            'id' => $id
         ]);
     }
 
@@ -85,7 +87,14 @@ class ShopsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = new User;
+        $user = $users->find($id);
+       
+        $user->del_flg=0;
+        $user->save();
+       
+        return redirect('/user');
+
     }
 
     /**
@@ -128,9 +137,9 @@ class ShopsController extends Controller
         //
     }
 
-    public function manager()
-    {
-        return view('post_list');
-    }
+    // public function manager()
+    // {
+    //     return view('post_list');
+    // }
 
 }
