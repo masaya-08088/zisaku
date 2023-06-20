@@ -63,12 +63,14 @@ class ShopsController extends Controller
      */
     public function show($id)
     {
-        $review = new User;
+        $review = new Review;
         
         $reviews = $review
-        ->join('reviews','users.id','reviews.user_id')
-        ->where('reviews.id',$id)
-        ->first();
+        ->join('users','reviews.user_id','users.id')
+        ->join('shops','reviews.shop_id','shops.id')
+        ->where('shops.user_id',$id)
+        ->where('reviews.del_flg',0)
+        ->get();
         // dd($reviews);
         return view('shop_review_check',[
             'reviews'=> $reviews,

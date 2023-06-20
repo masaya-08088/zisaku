@@ -82,7 +82,8 @@ class MainController extends Controller
     {
         $shops = DB::table('shops')
         ->join('reviews','shops.id','reviews.shop_id')
-        ->select('shops.image','shops.name','shops.address',DB::raw("avg(reviews.points) as points"))
+        ->select('shops.id','shops.image','shops.name','shops.address',DB::raw("avg(reviews.points) as points"))
+        ->groupBy('shops.id')
         ->groupBy('shops.image')
         ->groupBy('shops.address')
         ->groupBy('shops.name')

@@ -26,6 +26,10 @@
 </form>
 </div>
 <div class="new-spot-3">
+    <?php $user = Auth::user(); ?>
+    @if(isset($user) && $user->del_flg==1)
+    <h3>利用停止されています</h3>
+    @endif
 　<a href="{{route('shoplist')}}">店舗一覧</a>
 
         <table class="table">

@@ -3,9 +3,9 @@
 @section('content')
     <div class='mypage.blade'>
             <div class='mypage-1'>
-                <!-- アイコン画像表示 -->
-                <img src="data" alt="">
+                
                 <h4><?php $user = Auth::user(); ?>{{ $user->name }}</h4>
+                @if($user->del_flg==0)
                 <a href="{{ route('user.create')}}">
                     <button type='button' class='btn btn-mypage.blade'>新規投稿</button>
                 </a>
@@ -15,6 +15,9 @@
                 <a href="{{ route('violation.index')}}">
                     <button type='button' class='btn btn-mypage.blade-1'>違反報告</button>
                 </a>
+                @else
+                <h3>利用停止されています</h3>
+                @endif
             </div>
             <hr style="height: 1px; background-color: #000000; ">
             <div class='btn-mypage'>
@@ -35,7 +38,9 @@
             @foreach($mys as $my)
             <tr>
             <th>
+            @if($user->del_flg==0)
                  <a href="{{ route('shopedit',['id'=>$my['id']])}}">編集</a>
+            @endif
             </th>
             <th scope='col'> {{ $my['title']}} </th>
             <th scope='col'> {{ $my['points']}} </th>

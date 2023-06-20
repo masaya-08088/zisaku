@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Shop;
 
 class HomeController extends Controller
 {
@@ -37,7 +37,11 @@ class HomeController extends Controller
         }
         // 店舗管理者
         elseif($users['role']==2){
-            return view('shop_manager');
+            $shop = Shop::where('user_id',Auth::id())->first();
+
+            return view('shop_manager',[
+               'shop' => $shop
+            ]);
         }
         // return view('home');
     }

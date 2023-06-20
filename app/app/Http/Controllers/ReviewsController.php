@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -29,7 +30,10 @@ class ReviewsController extends Controller
      */
     public function create()
     {
-        return view('shop_manager');
+        $shop = Shop::where('user_id',Auth::id())->first();
+        return view('shop_manager',[
+            'shop'=>$shop
+        ]);
     }
 
     /**
@@ -69,8 +73,23 @@ class ReviewsController extends Controller
      */
     public function show($id)
     {
-
-       
+        $shops = DB::table('shops')
+        ->join('reviews','shops.id','reviews.shop_id')
+        ->select('shops.id','shops.image','shops.name','shops.address',DB::raw("avg(reviews.points) as points"))
+        ->groupBy('shops.id')
+        ->groupBy('shops.image')
+        ->groupBy('shops.address')
+        ->groupBy('shops.name')
+        ->get();
+        $reviews = DB::table('shops')
+        ->join('reviews','shops.id','reviews.shop_id')
+        ->join('users','reviews.user_id','users.id')
+        ->where('reviews.shop_id',$id)->where('reviews.del_flg',0)->get();
+        
+       return view('store_details',[
+        'shops'=> $shops,
+        'reviews'=>$reviews,
+       ]);
     }
 
     /**

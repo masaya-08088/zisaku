@@ -24,9 +24,9 @@
                 <th scope='col'>
                     <img width="200" height="200" src="{{ asset('storage/images/'.$shop->image)}}" alt="">
                 </th>
-                <th scope='col'> {{ $shop->name}} </th>
+                <th scope='col'><a href="{{route('reviews.show',['review'=> $shop->id])}}"> {{ $shop->name}} </a></th>
                 <th scope='col'>{{ $shop->address}}</th>
-                <th scope='col'> {{ $shop->points}} </th>
+                <th scope='col'> {{ number_format($shop->points,1)}} </th>
             </tr>
             @endforeach
             </tbody>

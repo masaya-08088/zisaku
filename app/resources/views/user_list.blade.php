@@ -16,7 +16,6 @@
                     <th scope='col'>ユーザー名</th>
                     <th scope='col'>投稿件数</th>
                     <th scope='col'>違反件数</th>
-                    <th scope='col'>投稿非表示件数</th>
                     <th scope='col'>公開・非公開</th>
                     
                 </tr>
@@ -30,7 +29,6 @@
                 <th scope='col'>{{ $user['name']}}</th>
                 <th scope='col'>{{ $user['review_count']}}</th>
                 <th scope='col'>{{ $user['violation_count']}}</th>
-                <th scope='col'>{{ $user['del_flg_count']}}</th>
                 <th scope='col'>
                     @if($user['del_flg']==0)
                     <a href="{{route('violation.edit',['violation'=>$user['id']])}}">非公開する</a>

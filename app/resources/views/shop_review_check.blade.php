@@ -13,7 +13,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                
+                @foreach($reviews as $review)
+                <tr>
+                <th scope='col'>{{ $review['name']}}</th>
+                <th scope='col'>{{ $review['title']}}</th>
+                <th scope='col'>{{ $review['episode']}}</th>
+                </tr>
+                @endforeach
                 </tbody>
         </table>
     </div>
