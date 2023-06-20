@@ -40,6 +40,10 @@ class User extends Authenticatable
     public function review(){
         return $this->hasMany('App\Review');
        }
+
+       public function del_flg(){
+        return $this->hasMany('App\Review');
+       }
        
        public function shop(){
         return $this->hasMany('App\Shop');

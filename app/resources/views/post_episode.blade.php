@@ -15,14 +15,14 @@
             <div class="new-title">
                 <h5>・エピソード登録</h5>
                 <label for="title">タイトル </label>
-                 <input type="text" class='form-control' name='title'/>
+                 <input type="text" class='form-control' name='title'required>
                  <label for="image">お店画像</label>
-                  <input type="file" id="image" name="image" >
+                  <input type="file" id="image" name="image" required>
                 <div class="episode-1">
-                    <label for="episode" class="mt--2">コメント内容 </label>
-                    <textarea class="form-control" name="episode"></textarea>
+                    <label for="episode" class="mt--2" >コメント内容 </label>
+                    <textarea class="form-control" name="episode" required></textarea>
                 </div>
-                <select name='points'>
+                <select name='points' required>
                     <option value='1'>⭐️</option>
                     <option value='2'>⭐️⭐️</option>
                     <option value='3'>⭐️⭐️⭐️</option>
@@ -30,7 +30,7 @@
                     <option value='5'>⭐️⭐️⭐️⭐️⭐️</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary w-25 mt-3">投稿内容確認</button>
+            <button type="submit" class="btn btn-primary w-25 mt-3">投稿</button>
         </form>
             <div class='btn-post_episode.blade'>
                 <a href="{{ route('user.create')}}">

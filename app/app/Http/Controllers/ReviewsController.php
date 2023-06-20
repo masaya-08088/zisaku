@@ -47,15 +47,18 @@ class ReviewsController extends Controller
         $review->title = $request->title;
         $review->points = $request->points;
         $review->episode = $request->episode;
-
-        $file_name = $request->file('image')->getClientOriginalName();
-        $request->file('image')->storeAs('public/images' , $file_name);        
-        $review->image = $file_name;
+        $image=$request->file('image');
+        if(isset($image)){
+            $file_name = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public/images' , $file_name);        
+            $review->image = $file_name;
+        }
+        
         
 
         $review->save();
         
-         return view('home');
+         return redirect('/');
     }
 
     /**
@@ -66,7 +69,8 @@ class ReviewsController extends Controller
      */
     public function show($id)
     {
-        
+
+       
     }
 
     /**
@@ -143,9 +147,18 @@ class ReviewsController extends Controller
     public function list()
     {
         $review = new Review;
-        $reviews = $review->join('users','reviews.user_id','users.id')->join('shops','reviews.shop_id','shops.id')->select('reviews.*','users.*','shops.*','users.name as user','reviews.id as review','reviews.del_flg as del')
-        ->where('role',1)->withCount('violation')->get();
+        // $reviews = $review->join('users','reviews.user_id','users.id')
+        // ->join('shops','reviews.shop_id','shops.id')->select('reviews.*','users.*','shops.*','users.name as user','reviews.id as review','reviews.del_flg as del')
+        // ->where('role',1)->withCount('review')
+        // // ->orderBy('violation_count','desc')
+        // // ->take(20)
+        // ->get();
         // dd($reviews);
+        $reviews = $review->join('users','reviews.user_id','users.id')
+        ->join('shops','reviews.shop_id','shops.id')->select('reviews.*','users.*','shops.*','users.name as user','reviews.id as review','reviews.del_flg as del')
+        ->where('role',1)->withCount('violation')
+        ->orderBy('violation_count','desc')
+        ->take(20)->get();
         
         return view('post_list',[
             'reviews' => $reviews,

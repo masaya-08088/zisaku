@@ -39,7 +39,10 @@
                 @endif
                 </th>
                 <th scope='col'>{{$review['violation_count']}}</th>
-                <th scope='col'></th>
+                <th scope='col'>
+                <a href="{{route('picup',['id'=>$review['review']])}}">詳細</a>
+
+                </th>
             </tr>
           
             @endforeach

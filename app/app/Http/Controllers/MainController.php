@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Review;
@@ -12,12 +12,37 @@ use App\User;
 
 class MainController extends Controller
 {
-    public function main()
+    public function main(Request $request)
     {
-        $displays = new Review;
-        $displays = $displays->all();
+        $keyword=$request->input('keyword');
+        $sel01=$request->input('sel01');
+        $user = Review::query();
+        $space = mb_convert_kana($keyword, 's');
+        $keys = explode(" ",$space);
+        $user->join('shops',function ($user) use($request){
+            $user->on('reviews.shop_id','=','shops.id');
+       })
+       ->join('users',function ($user) use($request){
+        $user->on('reviews.user_id','=','users.id');
+       })->select('users.*','reviews.*','shops.*','shops.name as shopname');
+       if(!empty($keyword)){
+        foreach($keys as $key){
+            $user->orWhere('title', 'LIKE', "%{$key}%")
+            ->orWhere('episode', 'LIKE', "%{$key}%")
+            ->orWhere('address', 'LIKE', "%{$key}%");
+            }
+            if(!empty($sel01)){
+                $user->orWhere('points', 'LIKE', "%{$sel01}%");   
+            }
+       }
+       $displays=$user->get();
+
+        // $displays = new Review;
+        // $displays = $displays->all();
         return view('main',[
-            'displays' => $displays
+            'displays' => $displays,
+            'keyword'=> $keyword,
+            'sel01'=> $sel01
         ]);
     }
     
@@ -32,7 +57,8 @@ class MainController extends Controller
         ->where('reviews.id',$id)
         ->first();
         return view('post_edit',[
-            'revirew' => $review
+            'revirew' => $review,
+            'id'=>$id
         ]);
     }
     
@@ -52,11 +78,16 @@ class MainController extends Controller
             'id' => $id
         ]);
     }
-    public function shoplist($id)
+    public function shoplist()
     {
-        $shop = new Shop;
+        $shops = DB::table('shops')
+        ->join('reviews','shops.id','reviews.shop_id')
+        ->select('shops.image','shops.name','shops.address',DB::raw("avg(reviews.points) as points"))
+        ->groupBy('shops.image')
+        ->groupBy('shops.address')
+        ->groupBy('shops.name')
+        ->get();
         
-        $shops = $shop->all();
        
         return view('list_stores',[
             'shops' => $shops
@@ -86,7 +117,27 @@ class MainController extends Controller
        
         return redirect('/list');
     }
-    
 
+    // ユーザの詳細
+    public function picup($id)
+    {
+        $review = new User;
+        
+        $reviews = $review
+        ->join('reviews','users.id','reviews.user_id')
+        ->where('reviews.id',$id)
+        ->first();
+        // dd($reviews);
+    
+        
+        
+        return view('stop_display',[
+            'reviews' => $reviews,
+            'id' => $id
+        ]);
+    }
+
+   
+    
     
 }

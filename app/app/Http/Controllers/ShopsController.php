@@ -63,19 +63,17 @@ class ShopsController extends Controller
      */
     public function show($id)
     {
-        $user = new User;
-        $user = $user->all();
+        $review = new User;
         
-
-        $review = new Review;
-        $reviews = $review->where('user_id',$id)->get();
-
-        
-        
+        $reviews = $review
+        ->join('reviews','users.id','reviews.user_id')
+        ->where('reviews.id',$id)
+        ->first();
+        // dd($reviews);
         return view('shop_review_check',[
-            'users' => $user,
             'reviews'=> $reviews,
-            'id' => $id
+            'id'=> $id,
+           
         ]);
     }
 
@@ -109,11 +107,13 @@ class ShopsController extends Controller
         
         $review = new Review;
         $reviews = $review->find($id);
-
-        $file_name = $request->file('image')->getClientOriginalName();
+        $image= $request->file('image');
+        if(isset($image)){
+            $file_name = $request->file('image')->getClientOriginalName();
         $request->file('image')->storeAs('public/images' , $file_name);        
         $reviews->image = $file_name;
-
+        }
+    
         $reviews->user_id = Auth::id();
         $reviews->shop_id = $request->shop_id;
         $reviews->title = $request->title;
@@ -134,12 +134,12 @@ class ShopsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $review= Review::find($id);
+        $review->delete();
+        return redirect()->route('user.show',['user'=>Auth::id()]);
     }
 
-    // public function manager()
-    // {
-    //     return view('post_list');
-    // }
+   
+
 
 }

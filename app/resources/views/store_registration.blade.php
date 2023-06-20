@@ -16,13 +16,13 @@
 
                 <div class="review-1">
                 <label for="name" class="mt-2">店舗名　:</label>
-                　<input type="text" class="form-control" name="name"/>
+                　<input type="text" class="form-control" name="name"required>
                 <label for="address" class="mt-2">所在地　:</label>
-                　<input id="address" type="text" class="form-control" name="address"/>
+                　<input id="address" type="text" class="form-control" name="address"required>
                 <label for="comment" class="mt--2">コメント内容 :</label>
-                <textarea class="form-control" name="comment"></textarea>
+                <textarea class="form-control" name="comment" required></textarea>
                 <label for="image">お店画像：</label>
-                <input type="file" id="image" name="image" >
+                <input type="file" id="image" name="image" required>
                 </div>
             　　　<button type="submit" class="btn btn-primary w-25 mt-3">登録</button>
             </form>

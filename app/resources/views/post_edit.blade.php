@@ -20,10 +20,10 @@
                 <label for="title">タイトル </label>
                  <input type="text" class='form-control'  name='title' value="{{ $revirew['title'] }}" required autocomplete="title" autofocus/>
                  <label for="image">お店画像</label>
-                 <input type="file" id="image" name="image" >
+                 <input type="file" id="image" name="image" required>
                 <div class="episode-1">
                     <label for="episode" class="mt--2">コメント内容 </label>
-                    <textarea class="form-control" name="episode" >{{ $revirew['episode'] }}</textarea>
+                    <textarea class="form-control" name="episode" required>{{ $revirew['episode'] }}</textarea>
                 </div>
                 <select name='points'>
                     <option value='1'>⭐️</option>
@@ -36,10 +36,12 @@
             <button type="submit" class="btn btn-primary w-25 mt-3">完了</button>
         </form>
 
-        <div class='btn-post_edit.blade'>
-            <a href="post_delete_conf.blade.php">
-                <button type='button'  class='btn btn-post_edit_conf.blade-1'>投稿を削除する</button>
-            </a>
+        <div class=''>
+           <form action="{{route('shops.destroy',['shop'=>$id])}}" method="post">
+            @csrf
+            @method('delete')
+                <button type='submit' onclick='return confirm("本当に削除しますか？")'>投稿を削除する</button>
+            </form>
         </div>
     </div>
 @endsection

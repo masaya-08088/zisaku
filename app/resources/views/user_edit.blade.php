@@ -51,7 +51,7 @@
                         @enderror
                 </div>
                     <div class='btn-user_edit'>
-                      <button type='submit' class='btn-user_edit-1'>編集内容確認</button>
+                      <button type='submit' class='btn-user_edit-1'>編集</button>
                     </div>
             </form>
                 <a href="{{route('delete',['user'=>Auth::id()])}}" value="削除" class="btn btn-danger float-right">アカウントを削除</a>

@@ -24,12 +24,12 @@
                     <!-- 画像追加 -->
 
                 @if(isset($shop))
-                 <a href="{{ route('shopdetale',['id'=>$shop['id']])}}">選択</a>
+                 <a href="{{ route('shopdetale',['shop' => $shop->id])}}">選択</a>
                 @endif
                 </th>
-                <th scope='col'> {{ $shop['name']}} </th>
-                <th scope='col'></th>
-                <th scope='col'> {{ $shop['address']}} </th>
+                <th scope='col'> {{ $shop->name}} </th>
+                <th scope='col'>{{ number_format($shop->points,1)}}</th>
+                <th scope='col'> {{ $shop->address}} </th>
             </tr>
             @endforeach
             </tbody>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -19,26 +20,16 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        // $user = new User;
-        $keyword=$request->input('keyword');
-        $user = Review::query();
-        $space = mb_convert_kana($keyword, 's');
-        $keys = explode(" ",$space);
-        // $users=User::where('role',1)->withCount('review','violation')->having('violation_count','>',0)->get();
-        $user->join('violations',function ($user) use($request){
-            $user->on('reviews.id','=','violations.review_id');
-       })
-       ->join('shops',function ($user) use($request){
-        $user->on('reviews.shop_id','=','shops.id');
-       });
-       if(!empty($keyword)){
-        foreach($keys as $key){
-            $user->orWhere('title', 'LIKE', "%{$key}%")
-            ->orWhere('episode', 'LIKE', "%{$key}%")
-            ->orWhere('address', 'LIKE', "%{$key}%");
-            }
-       }
-       $users=$user->get();
+    
+        $users=User::where('role',1)->withCount('review','violation')
+        ->join('reviews','users.id','reviews.user_id')
+        // ->select('reviews.*','users.*',DB::raw("count(reviews.del_flg) as count"))
+        ->having('violation_count','>',0)
+        // ->groupBy('reviews.del_flg')
+        ->orderBy('violation_count','desc')
+        ->take(10)
+        ->get();
+        // dd($users);
        
         return view('user_list',[
             'users' => $users
@@ -50,10 +41,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function create()
     {
-        $shops = new Shop;
-        $shops = $shops->all();
+        $shops = DB::table('shops')
+        ->join('reviews','shops.id','reviews.shop_id')
+        ->select('shops.id','shops.image','shops.name','shops.address',DB::raw("avg(reviews.points) as points"))
+        ->groupBy('shops.id')
+        ->groupBy('shops.image')
+        ->groupBy('shops.address')
+        ->groupBy('shops.name')
+        ->get();
+        
         return view('post_spot',[
             'shops' => $shops
         ]);
@@ -123,10 +123,13 @@ class UserController extends Controller
     {
         $instance =new User;
         $record =  $instance->find($id);
-        
-        $file_name = $request->file('image')->getClientOriginalName();
+        $image=$request->file('image');
+        if(isset($image)){
+            $file_name = $request->file('image')->getClientOriginalName();
         $request->file('image')->storeAs('public/images' , $file_name);        
         $record->image = $file_name;
+        }
+        
         $record->name =$request->name;
         $record->email =$request->email;
 

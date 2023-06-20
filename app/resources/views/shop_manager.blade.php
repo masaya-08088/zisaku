@@ -5,6 +5,7 @@
     <div class='btn-shop-manager'>
         <div class='text-3'>
             <h1>店舗管理者ページ</h1>
+            　<a href="{{route('shoplist')}}">店舗一覧</a>
         </div>
         <div class='btn-review'>
             <a href="{{ route('shops.show',['shop'=>Auth::id()])}}">
