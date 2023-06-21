@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($shops as $shop)
+           
             <tr>
                 <th scope='col'>
                     <img width="200" height="200" src="{{ asset('storage/images/'.$shop->image)}}" alt="">
@@ -28,7 +28,7 @@
                 <th scope='col'>{{ $shop->address}}</th>
                 <th scope='col'> {{ number_format($shop->points,1)}} </th>
             </tr>
-            @endforeach
+          
             </tbody>
         </table>
     </div>
@@ -36,6 +36,7 @@
     <div class="d-flex">
     @foreach($reviews as $review)
     <div class="card" style="width: 18rem;">
+    <img src="{{ asset('storage/images/'.$review->gazou)}}" class="card-img-top" alt="...">
   <div class="card-body">
     <h4 class="card-title">名前：{{$review->name}}</h4>
     <p class="card-text">タイトル：{{$review->title}}</p>

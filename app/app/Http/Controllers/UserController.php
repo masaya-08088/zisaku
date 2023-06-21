@@ -23,8 +23,11 @@ class UserController extends Controller
     
         $users=User::where('role',1)->withCount('review','violation')
         ->join('reviews','users.id','reviews.user_id')
-        ->having('violation_count','>',0)
+       
+        
         ->orderBy('violation_count','desc')
+        ->groupBy('users.id')
+        ->having('violation_count','>',0)
         ->take(10)
         ->get();
         

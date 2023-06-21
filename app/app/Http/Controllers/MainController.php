@@ -16,26 +16,28 @@ class MainController extends Controller
     {
         $keyword=$request->input('keyword');
         $sel01=$request->input('sel01');
-        $user = Review::query();
+        $display = Review::query();
         $space = mb_convert_kana($keyword, 's');
         $keys = explode(" ",$space);
-        $user->join('shops',function ($user) use($request){
-            $user->on('reviews.shop_id','=','shops.id');
-       })
-       ->join('users',function ($user) use($request){
-        $user->on('reviews.user_id','=','users.id');
-       })->select('users.*','reviews.*','shops.*','shops.name as shopname');
-       if(!empty($keyword)){
-        foreach($keys as $key){
-            $user->orWhere('title', 'LIKE', "%{$key}%")
-            ->orWhere('episode', 'LIKE', "%{$key}%")
-            ->orWhere('address', 'LIKE', "%{$key}%");
+        $display->join('shops',function ($display) use($request){
+            $display->on('reviews.shop_id','=','shops.id');
+        })
+        ->join('users',function ($display) use($request){
+            $display->on('reviews.user_id','=','users.id');
+        })->select('users.*','reviews.*','shops.*','shops.name as shopname','reviews.id as reviewid','reviews.image as gazou');
+        if(!empty($keyword)){
+            foreach($keys as $key){
+                $display->orWhere('title', 'LIKE', "%{$key}%")
+                ->orWhere('episode', 'LIKE', "%{$key}%")
+                ->orWhere('address', 'LIKE', "%{$key}%");
+                }
             }
             if(!empty($sel01)){
-                $user->orWhere('points', 'LIKE', "%{$sel01}%");   
-            }
-       }
-       $displays=$user->get();
+                $display->orWhere('points', 'LIKE', "%{$sel01}%");
+                }
+       $displays=$display->get();
+
+       
 
         // $displays = new Review;
         // $displays = $displays->all();

@@ -17,7 +17,7 @@
                 <label for="title">タイトル </label>
                  <input type="text" class='form-control' name='title'required>
                  <label for="image">お店画像</label>
-                  <input type="file" id="image" name="image" required>
+                  <input type="file" id="image" name="image" >
                 <div class="episode-1">
                     <label for="episode" class="mt--2" >コメント内容 </label>
                     <textarea class="form-control" name="episode" required></textarea>

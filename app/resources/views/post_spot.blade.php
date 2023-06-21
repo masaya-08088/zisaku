@@ -21,8 +21,6 @@
             @foreach($shops as $shop)
             <tr>
                 <th scope='col'>
-                    <!-- 画像追加 -->
-
                 @if(isset($shop))
                  <a href="{{ route('shopdetale',['shop' => $shop->id])}}">選択</a>
                 @endif

@@ -12,9 +12,7 @@
                 <a href="{{ route('user.edit',['user'=>Auth::id()])}}">
                     <button type='button' class='btn btn-mypage.blade-1'>ユーザー情報編集</button>
                 </a>
-                <a href="{{ route('violation.index')}}">
-                    <button type='button' class='btn btn-mypage.blade-1'>違反報告</button>
-                </a>
+               
                 @else
                 <h3>利用停止されています</h3>
                 @endif

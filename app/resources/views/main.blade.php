@@ -22,7 +22,7 @@
          
       </select>
    </div>
-   <input type="submit" value="検索" required>
+   <input type="submit" value="検索">
 </form>
 </div>
 <div class="new-spot-3">
@@ -34,8 +34,8 @@
 
         <table class="table">
             <thead>
-
                 <tr>
+                　　<th scope='col'></th>
                     <th scope='col'>店名</th>
                     <th scope='col'>住所</th>
                     <th scope='col'>タイトル</th>
@@ -46,11 +46,17 @@
             <tbody>
             @foreach($displays as $display)
             <tr>
+            <th scope='col'>
+            <img width="200" height="200" src="{{ asset('storage/images/'.$display['gazou'])}}" alt="">
+            </th>
             <th scope='col'> {{ $display['shopname']}} </th>
             <th scope='col'> {{ $display['address']}} </th>
             <th scope='col'> {{ $display['title']}} </th>
             <th scope='col'> {{ $display['points']}} </th>
             <th scope='col'> {{ $display['episode']}} </th>
+            <th scope='col'>
+             <a href="{{ route('viol',['id'=>$display['reviewid']])}}">違反報告</a>                
+            </th>
             </tr>
             @endforeach
             </tbody>

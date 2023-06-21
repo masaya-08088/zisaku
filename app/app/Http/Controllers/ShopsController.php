@@ -45,6 +45,8 @@ class ShopsController extends Controller
         $shop->comment = $request->comment;
         $shop->longitude = $request->longitude;
         $shop->atitude = $request->atitude;
+        $shop->user_id = Auth::id();
+
         
 
         $file_name = $request->file('image')->getClientOriginalName();

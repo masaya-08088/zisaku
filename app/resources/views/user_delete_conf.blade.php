@@ -12,9 +12,9 @@
                 @method('delete')
                 <input type='submit' value="削除" class='btn-user_edit-1' onclick='return confirm("削除しますか？")';>
                 <label for="name" class="col-md-1">ユーザー名</label>
-                <input  value="{{ old('name',isset($result['name']) ? $result['name'] :'')}}" type=text  calass='form-contorl' name='name'/>
+                <input  value="{{ old('name',isset($result['name']) ? $result['name'] :'')}}" type=text  calass='form-contorl' name='name' required/>
                 <ladel for="mail" class="col-md-1">メールアドレス</ladel>
-                <input  value="{{ old('email',isset($result['email']) ? $result['email'] :'')}}" type="email"  calass='form-contorl'  name="email" id='email'/>
+                <input  value="{{ old('email',isset($result['email']) ? $result['email'] :'')}}" type="email"  calass='form-contorl'  name="email" id='email' required/>
         　　　</form>
     </div>
         

@@ -73,21 +73,23 @@ class ReviewsController extends Controller
      */
     public function show($id)
     {
-        $shops = DB::table('shops')
+        $shop = DB::table('shops')
         ->join('reviews','shops.id','reviews.shop_id')
         ->select('shops.id','shops.image','shops.name','shops.address',DB::raw("avg(reviews.points) as points"))
+        ->where('reviews.shop_id',$id)->where('reviews.del_flg',0)
         ->groupBy('shops.id')
         ->groupBy('shops.image')
         ->groupBy('shops.address')
         ->groupBy('shops.name')
-        ->get();
+        ->first();
         $reviews = DB::table('shops')
         ->join('reviews','shops.id','reviews.shop_id')
         ->join('users','reviews.user_id','users.id')
+        ->select('users.*','reviews.*','shops.*','reviews.image as gazou')
         ->where('reviews.shop_id',$id)->where('reviews.del_flg',0)->get();
         
        return view('store_details',[
-        'shops'=> $shops,
+        'shop'=> $shop,
         'reviews'=>$reviews,
        ]);
     }
