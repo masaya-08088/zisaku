@@ -5,7 +5,7 @@
     <div class="review-2">
 
         <h3>違反報告画面</h3>
-       
+       <a href="/home">戻る</a>
     　　</div>
 </div>
 

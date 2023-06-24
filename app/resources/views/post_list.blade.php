@@ -3,7 +3,7 @@
 @section('content')
 <div class="review-1">
     <div class="review-2">
-
+    <a href="/home">戻る</a>
     <h3>管理ユーザー専用画面</h3>
     </div>
         <table class="table">

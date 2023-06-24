@@ -8,9 +8,11 @@
             　<a href="{{route('shoplist')}}">店舗一覧</a>
         </div>
         <div class='btn-review'>
-            <a href="{{ route('shops.show',['shop'=>$shop['user_id']])}}">
-                <button type='button' class='btn btn-review'>レビュー確認</button>
-            </a>
+            @if(isset($shop['user_id']))
+                    <a href="{{ route('shops.show',['shop'=>$shop['user_id']])}}">
+                        <button type='button' class='btn btn-review'>レビュー確認</button>
+                    </a>
+            @endif
         </div>
         <div class='btn-store-registration'>
             <div class='btn-store-registration'>

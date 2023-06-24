@@ -29,9 +29,18 @@
                     {{ config('app.name', 'レビューサイト') }}
                 </a>
                 @else
-                <a class="navbar-brand" href="{{route('user.show',['user'=>Auth::id()]) }}">
+               
+                        @if(Auth::user()->role==0||Auth::user()->role==2)
+                        <a class="navbar-brand" href="{{url('/home')}}">
+                         {{ config('app.name', 'レビューサイト') }}
+                        </a>
+                    
+                @elseif(Auth::user()->role==1)
+                 <a class="navbar-brand" href="{{url('/')}}">
                     {{ config('app.name', 'レビューサイト') }}
-                </a>
+                 </a>
+                    
+                    @endif
                 @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
